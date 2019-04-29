@@ -4,28 +4,26 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Reserve.findReserve", query = "SELECT r FROM Reserve r WHERE id = :PersonID")
+})
+
 @Table(name="Reserve")
 public class Reserve implements Serializable{
-	private String isbn;
-	private String bookcopy;
+	private BookID bookID;
 	private String id;
 	
-	@Column(name="isbn")
-	public String getIsbn() {
-		return isbn;
+	
+	public BookID getBookID() {
+		return bookID;
 	}
-	public void setIsbn(String isbn) {
-		this.isbn = isbn;
-	}
-	@Column(name="bookcopy")
-	public String getBookcopy() {
-		return bookcopy;
-	}
-	public void setBookcopy(String bookcopy) {
-		this.bookcopy = bookcopy;
+	public void setBookID(BookID bookID) {
+		this.bookID = bookID;
 	}
 	@Column(name="id")
 	public String getId() {

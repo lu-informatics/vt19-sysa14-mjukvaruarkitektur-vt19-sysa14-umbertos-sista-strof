@@ -5,30 +5,22 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Loaning.findLoan", query = "SELECT l FROM Loan l WHERE id = :PersonID")
+})
+
 @Table(name="Loaning")
 public class Loaning implements Serializable{
-	private String isbn;
-	private String bookcopy;
+	private BookID bookID;
 	private String id;
 	private Date starttime;
 	private Date endtime;
-	@Column(name="isbn")
-	public String getIsbn() {
-		return isbn;
-	}
-	public void setIsbn(String isbn) {
-		this.isbn = isbn;
-	}
-	@Column(name="bookcopy")
-	public String getBookcopy() {
-		return bookcopy;
-	}
-	public void setBookcopy(String bookcopy) {
-		this.bookcopy = bookcopy;
-	}
+	
 	@Column(name="id")
 	public String getId() {
 		return id;
@@ -49,6 +41,13 @@ public class Loaning implements Serializable{
 	}
 	public void setEndtime(Date endtime) {
 		this.endtime = endtime;
+	}
+	@Column
+	public BookID getBookID() {
+		return bookID;
+	}
+	public void setBookID(BookID bookID) {
+		this.bookID = bookID;
 	}
 
 }
