@@ -1,9 +1,11 @@
 package ejbModule;
 
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
+import java.io.Serializable;
 
-public class BookID {
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+@Embeddable
+public class BookID implements Serializable{
 
 private String isbn;
 private String bookcopy;

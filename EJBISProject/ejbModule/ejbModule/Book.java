@@ -12,8 +12,8 @@ import javax.persistence.Table;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Book.findBookWithSearch", 
-    		query = "SELECT b FROM Book b WHERE isbn = %searchTerm% OR title = %searchTerm% OR author %searchTerm%"),
-    @NamedQuery(name = "Book.findAllBooks", query = "SELECT b FROM Book b")
+    		query = "SELECT b FROM Book b WHERE b.title LIKE :searchTerm OR b.author LIKE :searchTerm"),
+    @NamedQuery(name = "Book.findAllBooks", query = "SELECT b FROM Book b"),
 
 })
 @Table(name="book")
@@ -42,7 +42,6 @@ public class Book implements Serializable {
 		this.author = author;
 	}
 	@EmbeddedId
-	@Column
 	public BookID getBookID() {
 		return bookID;
 	}

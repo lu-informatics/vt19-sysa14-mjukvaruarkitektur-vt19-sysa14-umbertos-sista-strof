@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -11,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Loaning.findLoan", query = "SELECT l FROM Loan l WHERE id = :PersonID")
+    @NamedQuery(name = "Loaning.findLoan", query = "SELECT l FROM Loaning l WHERE l.id = :PersonID"),
 })
 
 @Table(name="Loaning")
@@ -42,7 +43,7 @@ public class Loaning implements Serializable{
 	public void setEndtime(Date endtime) {
 		this.endtime = endtime;
 	}
-	@Column
+	@EmbeddedId
 	public BookID getBookID() {
 		return bookID;
 	}
