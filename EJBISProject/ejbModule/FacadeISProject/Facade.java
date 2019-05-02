@@ -9,11 +9,14 @@ import javax.ejb.Stateless;
 import EAOISProject.BookLocal;
 import EAOISProject.LoaningImpl;
 import EAOISProject.LoaningLocal;
+import EAOISProject.PersonLocal;
 import EAOISProject.ReserveLocal;
 import ejbModule.Book;
 import ejbModule.BookID;
 import ejbModule.Loaning;
 import ejbModule.Reserve;
+import ejbModule.Person;
+
 
 /**
  * Session Bean implementation class Facade
@@ -29,6 +32,8 @@ public class Facade implements FacadeRemote, FacadeLocal {
 	ReserveLocal Reserve;
 	@EJB
 	BookLocal Book;
+	@EJB
+	PersonLocal Person;
 
     /**
      * Default constructor. 
@@ -53,6 +58,9 @@ public class Facade implements FacadeRemote, FacadeLocal {
 	}
 	public List<Book> FindAllBooks(){
 		return Book.FindAllBooks();
+	}
+	public Person CreatePerson(Person person) {
+		return Person.CreatePerson(person);
 	}
     
 
