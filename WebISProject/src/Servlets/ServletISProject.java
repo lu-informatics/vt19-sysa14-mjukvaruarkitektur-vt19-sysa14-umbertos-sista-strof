@@ -20,7 +20,7 @@ import ejbModule.Book;
 /**
  * Servlet implementation class ServletISProject
  */
-@WebServlet("/ServletISProject/*")
+@WebServlet("/ServletISProject")
 public class ServletISProject extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@EJB
@@ -35,26 +35,28 @@ public class ServletISProject extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-    	String pathInfo = request.getParameter("SearchText");
+    	
+    	String pathInfo = request.getParameter("Text");
     	System.out.println(pathInfo);
     	
     	if(pathInfo == null || pathInfo.equals("")) {
     		System.out.println("alla");
     		System.out.println(pathInfo);
     		List<Book> allBooks = Facade.FindAllBooks();
-    		sendAsJson(response, allBooks);
-    		return;
+        	sendAsJson(response, request, allBooks);
     	}
+    	
     	else if(pathInfo != null) {
     		System.out.println("alla2");
     		System.out.println(pathInfo);
     		List<Book> books = Facade.SearchBook(pathInfo);
-        	sendAsJson(response, books);
+    		sendAsJson(response, request, books);
     		return;
     	}
+    
     }
     
-    private void sendAsJson(HttpServletResponse response, List<Book> books) throws IOException {
+    private void sendAsJson(HttpServletResponse response, HttpServletRequest request, List<Book> books) throws IOException, ServletException {
     	PrintWriter out = response.getWriter();
     	response.setContentType("application/json");
     
@@ -65,15 +67,19 @@ public class ServletISProject extends HttpServlet {
     			JsonObjectBuilder o = Json.createObjectBuilder();
     			o.add("BookID", String.valueOf(b.getBookID()));
     			o.add("title", b.getTitle());
-    			o.add("author", String.valueOf(b.getAuthor()));
+    			o.add("author", b.getAuthor());
     			array.add(o);
     		}
-    		JsonArray jsonArray = array.build();
-    		
+    		JsonArray jsonArray = array.build(); 		
     		System.out.println("Book Rest: "+jsonArray);
-    		out.print(jsonArray);
+    		request.setAttribute("book", jsonArray);
+    		request.getRequestDispatcher("/Books.jsp").forward(request, response);
+    		
+    		
+    		//out.print(jsonArray);
     	} else{
-    		out.print("[]");
+    		//out.print("[]");
     	}
-    	out.flush();}
+    	//out.flush();
+    	}
 }

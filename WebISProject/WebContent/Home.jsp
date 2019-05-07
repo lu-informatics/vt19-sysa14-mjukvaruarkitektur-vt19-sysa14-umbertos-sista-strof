@@ -145,10 +145,10 @@
                 <div id="header">
                     <p1> Biblo </p1>
                     <u1>
-                        <li style="position:absolute; left:0px; top:127px;"><a href="http://localhost:8080/WebISProject/jsp/Home.jsp">Home</a></li>
+                        <li style="position:absolute; left:0px; top:127px;"><a href="http://localhost:8080/WebISProject/Home.jsp">Home</a></li>
                         <li style="position:absolute; left:71px; top:127px;"><a href="http://www.google.com">Books</a></li>
                         <li style="position:absolute; left:139px; top:127px;"><a href="http://www.facebook.com">Reserve</a></li>
-                        <li style="position:absolute; left:219px; top: 127px; "><a href="http://localhost:8080/WebISProject/jsp/About.jsp">About</a></li>
+                        <li style="position:absolute; left:219px; top: 127px; "><a href="http://localhost:8080/WebISProject/About.jsp">About</a></li>
                     </u1>
                     <fieldset id="PersonalFS">
                         <p2>Email:</p2>
@@ -169,7 +169,7 @@
                     <div id="main">
                                 <form action="ServletISProject" method="Get">
                                     <h1>Search Book</h1>
-                                    <input type="text" name="SearchText" id="SearchText" />
+                                    <input type="text" name="Text" id="SearchText" />
                                     <input type="submit" name="SearchBook" value="Search" id="SearchBook" />
                                 </form>
                                 
@@ -225,23 +225,3 @@
                 </div>
         </body>
 </html>
-<script>
-$("#SearchBook").click( function() {
-	var strValue = $("SearchText").val();
-	if(strValue != "") {
-		$.ajax({
-			method: "GET",url: "http://localhost:8080/WebIsProject/ServletISproject/"+strValue,
-			error: ajaxFindReturnError, 
-			success: ajaxFindReturnSuccess
-		})
-		functionajaxFindReturnSuccess(result, status, xhr) {
-			ParseJsonFileBook(result);
-		}
-		functionajaxFindReturnError(result, status, xhr) {
-			alert("Error");
-			console.log("Ajax-find Book: "+status);
-		}
-	}
-})//btnclick
-
-</script>

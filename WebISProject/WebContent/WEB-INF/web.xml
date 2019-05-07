@@ -15,7 +15,7 @@
   </servlet>
   <servlet-mapping>
   <servlet-name>ServletISProject</servlet-name>
-  <url-pattern>/ServletISProject</url-pattern>
+  <url-pattern>/Books.jsp</url-pattern>
   </servlet-mapping>
   
 

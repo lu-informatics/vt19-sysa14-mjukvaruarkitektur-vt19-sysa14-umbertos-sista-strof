@@ -58,7 +58,8 @@
             font-family: "Century Gothic", CenturyGothic, AppleGothic,sans-serif;
         }
 
-        u1 {
+        #NavBar {
+        margin-top:50px;
         }
 
         h1 {
@@ -68,14 +69,14 @@
             font-family: "Century Gothic", CenturyGothic, AppleGothic,sans-serif;
         }
 
-        p1 {
+        #Title {
             color: white;
             font-size: 50px;
             margin-left: 10px;
             font-family: "Century Gothic", CenturyGothic, AppleGothic,sans-serif;
         }
 
-        p2 {
+        #LoginText {
             color: white;
             font-family: "Century Gothic", CenturyGothic, AppleGothic,sans-serif;
         }
@@ -87,6 +88,9 @@
             text-align: center;
             padding: 5px;
             text-align: center;
+            width: 100%;
+            
+            
         }
         #MainTable {
             background: white;
@@ -100,7 +104,7 @@
             margin-top: 100px;
         }
 
-        fieldset {
+        #PersonalFS {
             float: right;
             width: 100px;
             height: 60px;
@@ -110,12 +114,12 @@
             text-align: left;
         }
 
-        li {
+       #NavButton {
             float: left;
             list-style: none;
         }
 
-            li a {
+            #aNavButton {
                 background-color: grey;
                 display: block;
                 color: white;
@@ -127,35 +131,13 @@
 
         
 
-        li a:hover {
+        #aNavButton:hover {
             background-color: #111;
             color: white;
         }
 
     </style>
-    <div id="header">
-        <p1> Biblo </p1>
-        <u1>
-            <li style="position:absolute; left:0px; top:127px;"><a href="http://localhost:8080/WebISProject/jsp/Home.jsp">Home</a></li>
-            <li style="position:absolute; left:71px; top:127px;"><a href="http://www.google.com">Books</a></li>
-            <li style="position:absolute; left:139px; top:127px;"><a href="http://www.facebook.com">Reserve</a></li>
-            <li style="position:absolute; left:219px; top: 127px; "><a href="http://localhost:8080/WebISProject/jsp/About.jsp">About</a></li>
-        </u1>
-        <fieldset id="PersonalFS">
-            <p2>Email:</p2>
-            <br>
-            <input type="text" name="Email" id="Email" value="Donald">
-            <br>
-            <p2>Password:</p2>
-            <br>
-            <input type="text" name="lastname" id="lastname" value="Duck">
-            <br>
-            <br>
-            <input type="submit" id="login" value="Log in">
-            <input type="submit" id="CreateAccount" value="Create Account">
-        </fieldset>
-    </div>
-
+    <%@ include file="html/Header.html" %>
     <div id="wrap">
         <div id="main">
             <table id="MainTable">
@@ -172,52 +154,6 @@
             </table>
         </div>
     </div>
-
-    <div id="footer">
-        <table style="width:100%;" id="FooterTable">
-            <col width="33%" />
-            <col width="33%" />
-            <col width="33%" />
-            <tr id="1">
-                <th id="footerText">Opening hours</th>
-                <th id="footerText">Address</th>
-                <th id="footerText">Follow us on Social Media</th>
-            </tr>
-            <tr id="1">
-                <td id="footerText">Mon 8-18</td>
-                <td id="footerText">Tunavägen 5 Lund</td>
-                <td id="footerText">Facebook</td>
-            </tr>
-            <tr id="1">
-                <td id="footerText">Thu 8-18</td>
-                <td></td>
-                <td id="footerText">Twitter</td>
-            </tr>
-            <tr id="1">
-                <td id="footerText">Wed 8-18</td>
-                <td></td>
-                <td id="footerText">Instagram</td>
-            <tr id="1">
-                <td id="footerText">Thu 8-18</td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr id="1">
-                <td id="footerText">Fri 8-18</td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr id="1">
-                <td id="footerText">Sat 10-16</td">
-                <td></td>
-                <td></td>
-            </tr>
-            <tr id="1">
-                <td id="footerText">Sun closed</td>
-                <th></th>
-                <th></th>
-            </tr>
-        </table>
-    </div>
 </body>
+<%@ include file="html/Footer.html" %>
 </html>
