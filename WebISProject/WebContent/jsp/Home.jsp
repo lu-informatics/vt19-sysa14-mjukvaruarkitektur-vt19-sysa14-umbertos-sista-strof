@@ -167,7 +167,7 @@
         
                 <div id="wrap">
                     <div id="main">
-                                <form action="http://localhost:8080/WebISProject/ServletISProject" method="Get">
+                                <form action="ServletISProject" method="Get">
                                     <h1>Search Book</h1>
                                     <input type="text" name="SearchText" id="SearchText" />
                                     <input type="submit" name="SearchBook" value="Search" id="SearchBook" />
@@ -227,7 +227,7 @@
 </html>
 <script>
 $("#SearchBook").click( function() {
-	var strValue = $("#SearchText").val();
+	var strValue = $("SearchText").val();
 	if(strValue != "") {
 		$.ajax({
 			method: "GET",url: "http://localhost:8080/WebIsProject/ServletISproject/"+strValue,
@@ -235,23 +235,13 @@ $("#SearchBook").click( function() {
 			success: ajaxFindReturnSuccess
 		})
 		functionajaxFindReturnSuccess(result, status, xhr) {
-			ParseJsonFileMovie(result);
+			ParseJsonFileBook(result);
 		}
 		functionajaxFindReturnError(result, status, xhr) {
 			alert("Error");
-			console.log("Ajax-find movie: "+status);
+			console.log("Ajax-find Book: "+status);
 		}
 	}
 })//btnclick
 
-functionParseJsonFileMovie(result) {
-	$("#bookid").val(result.id);
-	$("#title").val(result.title);
-	$("#author").val(result.price);
-}
-functionclearFields() {
-	$("#bookid").val("");
-	$("#title").val("");
-	$("#author").val("");
-}
 </script>

@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Book.findBookWithSearch", 
-    		query = "SELECT b FROM Book b WHERE b.title LIKE :searchTerm OR b.author LIKE :searchTerm"),
+    		query = "SELECT b FROM Book b WHERE b.title = :searchTerm OR b.author = :searchTerm"),
     @NamedQuery(name = "Book.findAllBooks", query = "SELECT b FROM Book b"),
 
 })

@@ -35,24 +35,26 @@ public class ServletISProject extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-    	String pathInfo = request.getPathInfo();
-    	if(pathInfo == null || pathInfo.equals("/")) {
+    	String pathInfo = request.getParameter("SearchText");
+    	System.out.println(pathInfo);
+    	
+    	if(pathInfo == null || pathInfo.equals("")) {
     		System.out.println("alla");
     		System.out.println(pathInfo);
     		List<Book> allBooks = Facade.FindAllBooks();
     		sendAsJson(response, allBooks);
     		return;
     	}
-    	String[] splits = pathInfo.split("/");
     	
-    	if(splits.length != 2) {
+    	
+    	if(pathInfo != null) {
     		System.out.println("alla2");
+    		System.out.println(pathInfo);
+    		List<Book> books = Facade.SearchBook(pathInfo);
+        	sendAsJson(response, books);
     		response.sendError(HttpServletResponse.SC_BAD_REQUEST);
     		return;
     	}
-    	String searchTerm = splits[1];
-    	List<Book> books = Facade.SearchBook(searchTerm);
-    	sendAsJson(response, books);
     	
     }
     
@@ -63,7 +65,7 @@ public class ServletISProject extends HttpServlet {
     	
     	if(books != null) {
     		JsonArrayBuilder array = Json.createArrayBuilder();
-    		for(ejbModule.Book b: books) {
+    		for(Book b: books) {
     			JsonObjectBuilder o = Json.createObjectBuilder();
     			o.add("BookID", String.valueOf(b.getBookID()));
     			o.add("title", b.getTitle());

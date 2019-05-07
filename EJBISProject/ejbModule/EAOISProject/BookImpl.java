@@ -38,7 +38,7 @@ public class BookImpl implements BookLocal {
    
     public List<Book> SearchBook(String searchTerm){
     	TypedQuery<Book> query = em.createNamedQuery("Book.findBookWithSearch", Book.class);
-    	query.setParameter("serachTerm", searchTerm);
+    	query.setParameter("searchTerm", searchTerm);
     	
     	List<Book> results = query.getResultList();
     	return results;
