@@ -45,17 +45,13 @@ public class ServletISProject extends HttpServlet {
     		sendAsJson(response, allBooks);
     		return;
     	}
-    	
-    	
-    	if(pathInfo != null) {
+    	else if(pathInfo != null) {
     		System.out.println("alla2");
     		System.out.println(pathInfo);
     		List<Book> books = Facade.SearchBook(pathInfo);
         	sendAsJson(response, books);
-    		response.sendError(HttpServletResponse.SC_BAD_REQUEST);
     		return;
     	}
-    	
     }
     
     private void sendAsJson(HttpServletResponse response, List<Book> books) throws IOException {
