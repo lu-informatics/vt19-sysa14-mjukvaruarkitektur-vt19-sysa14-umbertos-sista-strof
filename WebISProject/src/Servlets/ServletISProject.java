@@ -2,19 +2,25 @@ package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.ejb.EJB;
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import FacadeISProject.FacadeLocal;
+import ejbModule.Book;
 
 /**
  * Servlet implementation class ServletISProject
  */
-@WebServlet("/ServletISProject")
+@WebServlet("/ServletISProject/*")
 public class ServletISProject extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@EJB
@@ -27,8 +33,49 @@ public class ServletISProject extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-    }
 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    	String pathInfo = request.getPathInfo();
+    	if(pathInfo == null || pathInfo.equals("/")) {
+    		System.out.println("alla");
+    		System.out.println(pathInfo);
+    		List<Book> allBooks = Facade.FindAllBooks();
+    		sendAsJson(response, allBooks);
+    		return;
+    	}
+    	String[] splits = pathInfo.split("/");
+    	
+    	if(splits.length != 2) {
+    		System.out.println("alla2");
+    		response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+    		return;
+    	}
+    	String searchTerm = splits[1];
+    	List<Book> books = Facade.SearchBook(searchTerm);
+    	sendAsJson(response, books);
+    	
+    }
+    
+    private void sendAsJson(HttpServletResponse response, List<Book> books) throws IOException {
+    	PrintWriter out = response.getWriter();
+    	response.setContentType("application/json");
+    
+    	
+    	if(books != null) {
+    		JsonArrayBuilder array = Json.createArrayBuilder();
+    		for(ejbModule.Book b: books) {
+    			JsonObjectBuilder o = Json.createObjectBuilder();
+    			o.add("BookID", String.valueOf(b.getBookID()));
+    			o.add("title", b.getTitle());
+    			o.add("author", String.valueOf(b.getAuthor()));
+    			array.add(o);
+    		}
+    		JsonArray jsonArray = array.build();
+    		
+    		System.out.println("Book Rest: "+jsonArray);
+    		out.print(jsonArray);
+    	} else{
+    		out.print("[]");
+    	}
+    	out.flush();}
 }

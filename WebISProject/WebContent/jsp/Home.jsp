@@ -2,6 +2,10 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
+</script>
+</head>
     <body>
         <style>
             #header {
@@ -29,6 +33,7 @@
                 width: 100%;
                 margin: 0px;
                 position:absolute; 
+                max-width:100%;
             }
 
             #main {
@@ -44,7 +49,7 @@
                 position: relative;
                 width: 100%;
                 margin: 0px;
-                background: blue;
+                background: grey;
                 height: 250px;
             }
 
@@ -140,10 +145,10 @@
                 <div id="header">
                     <p1> Biblo </p1>
                     <u1>
-                        <li style="position:absolute; left:0px; top:127px;"><a href="http://www.youtube.com">Home</a></li>
+                        <li style="position:absolute; left:0px; top:127px;"><a href="http://localhost:8080/WebISProject/jsp/Home.jsp">Home</a></li>
                         <li style="position:absolute; left:71px; top:127px;"><a href="http://www.google.com">Books</a></li>
                         <li style="position:absolute; left:139px; top:127px;"><a href="http://www.facebook.com">Reserve</a></li>
-                        <li style="position:absolute; left:219px; top: 127px; "><a href="http://www.reddit.com">About</a></li>
+                        <li style="position:absolute; left:219px; top: 127px; "><a href="http://localhost:8080/WebISProject/jsp/About.jsp">About</a></li>
                     </u1>
                     <fieldset id="PersonalFS">
                         <p2>Email:</p2>
@@ -162,11 +167,12 @@
         
                 <div id="wrap">
                     <div id="main">
-                                <form action="ch06_eg01b.html" method="get">
+                                <form action="http://localhost:8080/WebISProject/ServletISProject" method="Get">
                                     <h1>Search Book</h1>
-                                    <input type="text" name="txtSearchItem" id="SearchText" />
-                                    <input type="submit" value="Search" id="SearchBook" />
+                                    <input type="text" name="SearchText" id="SearchText" />
+                                    <input type="submit" name="SearchBook" value="Search" id="SearchBook" />
                                 </form>
+                                
                     </div>
                 </div>
         
@@ -219,3 +225,33 @@
                 </div>
         </body>
 </html>
+<script>
+$("#SearchBook").click( function() {
+	var strValue = $("#SearchText").val();
+	if(strValue != "") {
+		$.ajax({
+			method: "GET",url: "http://localhost:8080/WebIsProject/ServletISproject/"+strValue,
+			error: ajaxFindReturnError, 
+			success: ajaxFindReturnSuccess
+		})
+		functionajaxFindReturnSuccess(result, status, xhr) {
+			ParseJsonFileMovie(result);
+		}
+		functionajaxFindReturnError(result, status, xhr) {
+			alert("Error");
+			console.log("Ajax-find movie: "+status);
+		}
+	}
+})//btnclick
+
+functionParseJsonFileMovie(result) {
+	$("#bookid").val(result.id);
+	$("#title").val(result.title);
+	$("#author").val(result.price);
+}
+functionclearFields() {
+	$("#bookid").val("");
+	$("#title").val("");
+	$("#author").val("");
+}
+</script>
