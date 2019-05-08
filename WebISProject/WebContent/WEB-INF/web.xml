@@ -10,13 +10,11 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-  <servlet-name>ServletISProject</servlet-name>
-  <servlet-class>Servlets.ServletISProject</servlet-class>
+  <servlet-name>BookServlet</servlet-name>
+  <servlet-class>Servlets.BookServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  <servlet-name>ServletISProject</servlet-name>
-  <url-pattern>/Books.jsp</url-pattern>
+  <servlet-name>BookServlet</servlet-name>
+  <url-pattern>/Books/*</url-pattern>
   </servlet-mapping>
-  
-
 </web-app>

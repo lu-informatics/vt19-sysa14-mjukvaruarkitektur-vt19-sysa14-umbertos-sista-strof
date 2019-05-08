@@ -12,11 +12,11 @@ import javax.persistence.Table;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Book.findBookWithSearch", 
-    		query = "SELECT b FROM Book b WHERE b.title = :searchTerm OR b.author = :searchTerm"),
+    		query = "SELECT b FROM Book b WHERE b.title LIKE :searchTerm OR b.author LIKE :searchTerm"),
     @NamedQuery(name = "Book.findAllBooks", query = "SELECT b FROM Book b"),
 
 })
-@Table(name="book")
+@Table(name="Book")
 public class Book implements Serializable {
 
 	private BookID bookID;

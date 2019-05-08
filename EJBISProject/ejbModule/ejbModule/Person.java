@@ -4,16 +4,23 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="person")
+@NamedQueries({
+	@NamedQuery(name="Person.CheckPassword", 
+			query="SELECT p FROM Person p WHERE p.email = :email")
+})
+@Table(name="Person")
 public class Person implements Serializable{
 	private String id;
 	private String firstsname;
 	private String lastname;
 	private String email;
 	private String phone;
+	private String password;
 	
 	@Id
 	@Column(name="id")
@@ -37,7 +44,8 @@ public class Person implements Serializable{
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-	@Column(name="email")
+	
+	@Column(unique=true, name="email")
 	public String getEmail() {
 		return email;
 	}
@@ -50,6 +58,13 @@ public class Person implements Serializable{
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	@Column(name="password")
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

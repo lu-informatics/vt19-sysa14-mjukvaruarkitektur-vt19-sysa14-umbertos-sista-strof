@@ -20,47 +20,42 @@ import ejbModule.Book;
 /**
  * Servlet implementation class ServletISProject
  */
-@WebServlet("/ServletISProject")
-public class ServletISProject extends HttpServlet {
+@WebServlet("/BookServlet")
+public class BookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@EJB
 	private FacadeLocal Facade;        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletISProject() {
+    public BookServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-    	
-    	String pathInfo = request.getParameter("Text");
-    	System.out.println(pathInfo);
-    	
-    	if(pathInfo == null || pathInfo.equals("")) {
-    		System.out.println("alla");
-    		System.out.println(pathInfo);
-    		List<Book> allBooks = Facade.FindAllBooks();
-        	sendAsJson(response, request, allBooks);
+    	String action = request.getParameter("submit");
+    	String pathinfo = request.getPathInfo();
+    	System.out.println(pathinfo);
+    	if(action != null) {
+    		if(action.equals("Search")) {
+    			String pathInfo = request.getParameter("Text");
+    				if(pathInfo == null || pathInfo.equals("")) {
+    					searchAllBooks(request,response);
+    				}
+    				else{
+    					searchBooks(request, response);
+    				}
+    			
+    		}
+    		
     	}
     	
-    	else if(pathInfo != null) {
-    		System.out.println("alla2");
-    		System.out.println(pathInfo);
-    		List<Book> books = Facade.SearchBook(pathInfo);
-    		sendAsJson(response, request, books);
-    		return;
-    	}
-    
     }
     
     private void sendAsJson(HttpServletResponse response, HttpServletRequest request, List<Book> books) throws IOException, ServletException {
-    	PrintWriter out = response.getWriter();
-    	response.setContentType("application/json");
-    
-    	
+    	response.setContentType("application/json");    
     	if(books != null) {
     		JsonArrayBuilder array = Json.createArrayBuilder();
     		for(Book b: books) {
@@ -73,13 +68,30 @@ public class ServletISProject extends HttpServlet {
     		JsonArray jsonArray = array.build(); 		
     		System.out.println("Book Rest: "+jsonArray);
     		request.setAttribute("book", jsonArray);
-    		request.getRequestDispatcher("/Books.jsp").forward(request, response);
+    		request.getRequestDispatcher("/Books.jsp").forward(request, response);		
+    	} 
+    	else{
     		
-    		
-    		//out.print(jsonArray);
-    	} else{
-    		//out.print("[]");
     	}
-    	//out.flush();
+    }
+    private void searchAllBooks(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    	String pathInfo = request.getParameter("Text");
+    	System.out.println(pathInfo);
+   
+    		System.out.println("alla");
+    		System.out.println(pathInfo);
+    		List<Book> allBooks = Facade.FindAllBooks();
+        	sendAsJson(response, request, allBooks);
     	}
-}
+
+    private void searchBooks(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    	String pathInfo = request.getParameter("Text");
+    	System.out.println(pathInfo);
+    		System.out.println("alla2");
+    		System.out.println(pathInfo);
+    		List<Book> books = Facade.SearchBook(pathInfo);
+    		sendAsJson(response, request, books);
+    		return;
+    	}
+    }
+

@@ -9,7 +9,6 @@ import ejbModule.BookID;
 
 @Local
 public interface BookLocal {
-	public Book findBook(BookID bookID);
 	public List<Book> SearchBook(String searchTerm);
 	public List<Book> FindAllBooks();
 }

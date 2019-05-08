@@ -1,12 +1,14 @@
 package EAOISProject;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import ejbModule.Person;
-import ejbModule.Reserve;
 
 /**
  * Session Bean implementation class Person
@@ -28,5 +30,13 @@ public class PersonImpl implements PersonLocal {
     	em.persist(person);
     	return person; 
     }
-
+    public List<Person> CheckPassword(String email) {
+    	TypedQuery<Person> query = em.createNamedQuery("Person.CheckPassword", Person.class);
+    	query.setParameter("email", email);
+    	//Person person = query.getSingleResult();
+    	//String password = person.getPassword();
+    	//return password; 
+    	List<Person> person = query.getResultList();
+    	return person;
+    }
 }

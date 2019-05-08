@@ -32,13 +32,10 @@ public class BookImpl implements BookLocal {
         // TODO Auto-generated constructor stub
     }
     
-    public Book findBook(BookID bookID){
-    	return em.find(Book.class, bookID);
-    }
    
     public List<Book> SearchBook(String searchTerm){
     	TypedQuery<Book> query = em.createNamedQuery("Book.findBookWithSearch", Book.class);
-    	query.setParameter("searchTerm", searchTerm);
+    	query.setParameter("searchTerm", "%" + searchTerm + "%");
     	List<Book> results = query.getResultList();
     	return results;
     }
