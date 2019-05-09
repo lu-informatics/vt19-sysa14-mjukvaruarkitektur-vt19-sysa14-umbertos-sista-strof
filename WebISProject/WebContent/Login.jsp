@@ -8,8 +8,11 @@
 </head>
 <body>
 <form action="PersonServlet" Method="Get">
+please enter your email
 <input type="text" name="email" id="email">
-<input type="submit" name="submit" value="Search" id="submit" />
+please enter your password
+<input type="password" name="password" id="password">
+<input type="submit" name="submit" value="Login" id="submit" />
 </form>
 </body>
 </html>

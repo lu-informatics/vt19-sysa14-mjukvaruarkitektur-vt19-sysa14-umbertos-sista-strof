@@ -9,7 +9,7 @@
 
 <body>
 <%@ include file="html/Header.html" %>
-    <form action="action_page.php" target="_blank">
+    <form action="PersonServlet" Method="Post">
         <div class="container">
             <h1> Register</h1>
             <p> Please fill in this form to create an account.</p>
@@ -24,11 +24,11 @@
             <label for="email"> <b> Email</b> </label>
             <input type="text" placeholder="Enter Email" name="email">
 
-            <label for="phonenumber"> <b> Phonenumber</b> </label>
-            <input type="text" placeholder="Enter Phonenumber" name="phonenumber">
+            <label for="phone"> <b> Phonenumber</b> </label>
+            <input type="text" placeholder="Enter Phonenumber" name="phone">
 
-            <label for="psw"> <b> Password</b> </label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
+            <label for="password"> <b> Password</b> </label>
+            <input type="password" placeholder="Enter Password" name="password" required>
 
             <label for="psw-repeat"> <b> Repeat Password</b> </label>
             <input type="password" placeholder="Repeat Password" name="psw-repeat" required>

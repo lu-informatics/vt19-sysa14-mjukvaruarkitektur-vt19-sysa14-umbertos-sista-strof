@@ -3,7 +3,9 @@ package Servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.UUID;
 
+import javax.ejb.EJB;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -15,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import FacadeISProject.FacadeLocal;
-import ejbModule.Book;
 import ejbModule.Person;
 /**
  * Servlet implementation class PersonServlet
@@ -23,7 +24,7 @@ import ejbModule.Person;
 @WebServlet("/PersonServlet")
 public class PersonServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-      
+    @EJB
 	FacadeLocal Facade;
     /**
      * @see HttpServlet#HttpServlet()
@@ -37,29 +38,29 @@ public class PersonServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String action = request.getParameter("submit");
-		if(action != null) {
-		String email = request.getParameter("email");
-		List<Person> person = Facade.CheckPassword(email);
-		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE html><html><head>");
-		out.println("<title>Lab1</title>");
-		out.println("<meta charset=\"ISO-8859-1\">");
-		out.println("</head><body>");
-		out.println("<h2>"+ person.size() +"</h2>");
-		out.println("</body></html>");
-		}
-		else {
-			throw new ServletException("Invalid action");
-		}
+		checkPassword(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		Person person = new Person();
+		person.setId(UUID.randomUUID().toString());
+		person.setFirstsname(request.getParameter("firstname"));
+		person.setLastname(request.getParameter("lastname"));
+		person.setEmail(request.getParameter("email"));
+		person.setPhone(request.getParameter("phone"));
+		person.setPassword(request.getParameter("password"));
+		System.out.println(person.getFirstsname());
+		System.out.println(person.getId());
+		try{
+		Facade.CreatePerson(person);
+		response.sendRedirect("Login.jsp");
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
 	}
 
 	/**
@@ -68,8 +69,9 @@ public class PersonServlet extends HttpServlet {
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}
-	private void createPerson(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	
+	private void checkPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 	}
 
 }

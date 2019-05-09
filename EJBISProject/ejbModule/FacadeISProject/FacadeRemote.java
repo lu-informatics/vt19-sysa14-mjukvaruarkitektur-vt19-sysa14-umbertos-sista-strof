@@ -18,5 +18,5 @@ public interface FacadeRemote {
 	public List<Loaning> PersonLoans(String id);
 	public List<Reserve> PersonReserve(String id);
 	public Reserve CreateReserve(Reserve reserve);
-	public List<Person> CheckPassword(String email);
+	public Person CheckPassword(String email);
 }

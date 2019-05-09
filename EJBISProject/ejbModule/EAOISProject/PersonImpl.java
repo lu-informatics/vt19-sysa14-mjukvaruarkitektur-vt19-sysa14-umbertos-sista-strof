@@ -30,13 +30,11 @@ public class PersonImpl implements PersonLocal {
     	em.persist(person);
     	return person; 
     }
-    public List<Person> CheckPassword(String email) {
+    public Person CheckPassword(String email) {
     	TypedQuery<Person> query = em.createNamedQuery("Person.CheckPassword", Person.class);
     	query.setParameter("email", email);
-    	//Person person = query.getSingleResult();
-    	//String password = person.getPassword();
-    	//return password; 
-    	List<Person> person = query.getResultList();
-    	return person;
+    	Person person = query.getSingleResult();
+    	return person; 
+
     }
 }

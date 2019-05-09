@@ -59,9 +59,7 @@ public class Facade implements FacadeRemote, FacadeLocal {
 	public Person CreatePerson(Person person) {
 		return Person.CreatePerson(person);
 	}
-	public List<Person> CheckPassword(String email){
+	public Person CheckPassword(String email){
 		return Person.CheckPassword(email);
-	}
-    
-
+	}    
 }
