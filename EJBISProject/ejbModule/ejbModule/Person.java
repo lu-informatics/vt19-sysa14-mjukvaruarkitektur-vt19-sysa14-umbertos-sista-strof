@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="Person.CheckPassword", 
+	@NamedQuery(name="Person.FindByEmail", 
 			query="SELECT p FROM Person p WHERE p.email = :email")
 })
 @Table(name="Person")

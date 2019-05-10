@@ -10,5 +10,6 @@ import ejbModule.Person;
 public interface PersonLocal {
 	public Person CreatePerson(Person person);
 	public Person CheckPassword(String email);
+	public String FindPersonID(String email);
 
 }

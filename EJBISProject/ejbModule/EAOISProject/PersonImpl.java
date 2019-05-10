@@ -1,5 +1,6 @@
 package EAOISProject;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -31,10 +32,17 @@ public class PersonImpl implements PersonLocal {
     	return person; 
     }
     public Person CheckPassword(String email) {
-    	TypedQuery<Person> query = em.createNamedQuery("Person.CheckPassword", Person.class);
+    	TypedQuery<Person> query = em.createNamedQuery("Person.FindByEmail", Person.class);
     	query.setParameter("email", email);
     	Person person = query.getSingleResult();
     	return person; 
 
+    }
+    public String FindPersonID(String email) {
+    	TypedQuery<Person> query = em.createNamedQuery("Person.FindByEmail", Person.class);
+    	query.setParameter("email", email);
+    	Person person = query.getSingleResult(); 
+    	String id = person.getId();
+    	return id;
     }
 }

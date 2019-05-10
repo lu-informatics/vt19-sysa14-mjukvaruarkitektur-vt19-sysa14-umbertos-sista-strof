@@ -30,7 +30,6 @@ public class LoaningImpl implements LoaningLocal {
     public List<Loaning> PersonLoans(String id){
     	TypedQuery<Loaning> query = em.createNamedQuery("Loaning.findLoan", Loaning.class);
     	query.setParameter("PersonID", id);
-    	
     	List<Loaning> results = query.getResultList();
     	return results;
     }

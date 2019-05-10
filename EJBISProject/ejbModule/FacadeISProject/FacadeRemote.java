@@ -19,4 +19,5 @@ public interface FacadeRemote {
 	public List<Reserve> PersonReserve(String id);
 	public Reserve CreateReserve(Reserve reserve);
 	public Person CheckPassword(String email);
+	public String FindPersonID(String email);
 }

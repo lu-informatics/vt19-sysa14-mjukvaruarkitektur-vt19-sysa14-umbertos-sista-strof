@@ -10,15 +10,18 @@
 </head>
 <body>
 <%@ include file="html/Header.html" %>
-	<table>
-		<c:forEach items="${book}" var="book">
-			<tr>
-				<td>${book.title}</td>
-				<td>${book.author}</td>
-				<td><form action="/reserve" Method = "Put" > <input type=submit value="reserve"></form></td>
-			</tr>
-		</c:forEach>
-	</table>
+	 <table id="books" align="center">
+            <th colspan="2">Books</th>
+            <tr>
+                <td>
+                   <table id = "bookTable">
+	</table> 
+                </td>
+            </tr>
+</table>
+	<div id = "1"></div>
 	<%@ include file="html/Footer.html" %>
+	
+	<script src = "js/Book.js"></script>
 </body>
 </html>
