@@ -11,4 +11,5 @@ import ejbModule.BookID;
 public interface BookLocal {
 	public List<Book> SearchBook(String searchTerm);
 	public List<Book> FindAllBooks();
+	public Book FindBookByID(String isbn, String bookcopy);
 }

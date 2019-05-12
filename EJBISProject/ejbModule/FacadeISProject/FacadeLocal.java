@@ -17,8 +17,10 @@ public interface FacadeLocal {
 	public List<Book> SearchBook(String searchTerm);
 	public List<Loaning> PersonLoans(String id);
 	public List<Reserve> PersonReserve(String id);
-	public Reserve CreateReserve(Reserve reserve);
-	public Person CheckPassword(String email);
+	public void DeleteReserve(Reserve reserve);
+	public void CreateReserve(Reserve reserve);
+	public String CheckPassword(String email);
 	public String FindPersonID(String email);
+	public Book FindBookByID(String isbn, String bookcopy);
 
 }

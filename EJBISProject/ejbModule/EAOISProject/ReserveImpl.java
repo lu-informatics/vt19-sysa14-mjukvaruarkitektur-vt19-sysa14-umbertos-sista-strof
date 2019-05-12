@@ -27,9 +27,12 @@ public class ReserveImpl implements ReserveLocal {
         // TODO Auto-generated constructor stub
     }
     
-    public Reserve CreateReserve(Reserve reserve) {
+    public void CreateReserve(Reserve reserve) {
     	em.persist(reserve);
-    	return reserve; 
+    	
+    }
+    public void DeleteReserve(Reserve reserve) {
+    	em.remove(reserve);
     }
     
     public List<Reserve> PersonReserve(String id){

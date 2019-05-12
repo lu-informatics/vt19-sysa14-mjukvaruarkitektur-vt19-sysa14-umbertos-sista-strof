@@ -8,7 +8,13 @@
 </script>
 </head>
     <body>
+    
+
+<% if (session.getAttribute("email") == null) { %>
     <%@ include file="html/Header.html" %>
+<% } else {%>
+    <%@ include file="html/LoggedInHeader.jsp" %>
+<% } %>
        
         
                 <div id="wrap">

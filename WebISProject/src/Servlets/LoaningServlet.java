@@ -2,6 +2,7 @@ package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -56,7 +57,8 @@ public class LoaningServlet extends HttpServlet {
     		JsonArrayBuilder array = Json.createArrayBuilder();
     		for(Loaning l: loans) {
     			JsonObjectBuilder o = Json.createObjectBuilder();
-    			o.add("BookID", String.valueOf(l.getBookID()));
+    			o.add("isbn", String.valueOf(l.getBookID().getisbn()));
+    			o.add("bookcopy", String.valueOf(l.getBookID().getbookcopy()));
     			o.add("ID", l.getId());
     			o.add("endTime", String.valueOf(l.getEndtime()));
     			array.add(o);

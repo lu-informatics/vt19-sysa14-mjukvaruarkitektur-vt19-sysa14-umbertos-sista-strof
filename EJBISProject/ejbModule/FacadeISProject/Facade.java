@@ -44,8 +44,11 @@ public class Facade implements FacadeRemote, FacadeLocal {
     public List<Loaning> PersonLoans(String id){
     	return Loaning.PersonLoans(id);
     }
-    public Reserve CreateReserve(Reserve reserve) {
-    	return Reserve.CreateReserve(reserve);
+    public void CreateReserve(Reserve reserve) {
+    	Reserve.CreateReserve(reserve);
+    }
+    public void DeleteReserve(Reserve reserve) {
+    	Reserve.DeleteReserve(reserve);
     }
 	public List<Reserve> PersonReserve(String id){
 		return Reserve.PersonReserve(id);
@@ -59,10 +62,13 @@ public class Facade implements FacadeRemote, FacadeLocal {
 	public Person CreatePerson(Person person) {
 		return Person.CreatePerson(person);
 	}
-	public Person CheckPassword(String email){
+	public String CheckPassword(String email){
 		return Person.CheckPassword(email);
 	}
 	public String FindPersonID(String email) {
 		return Person.FindPersonID(email);
+	}
+	public Book FindBookByID(String isbn, String bookcopy){
+		return Book.FindBookByID(isbn, bookcopy);
 	}
 }

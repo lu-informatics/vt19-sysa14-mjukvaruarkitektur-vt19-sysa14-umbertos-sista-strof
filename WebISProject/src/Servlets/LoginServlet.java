@@ -35,14 +35,14 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try { 
-			Person user = new Person();
 			String email = request.getParameter("email");
-			user.setEmail(request.getParameter("email"));
-			user.setPassword(request.getParameter("password"));
-			Person userComapre = Facade.CheckPassword(email);
-			if (user.getPassword().equals(userComapre.getPassword())) { 
-				HttpSession session = request.getSession(true);
-				session.setAttribute("currentSessionUser",userComapre);
+			String password = request.getParameter("password");
+			//user.setEmail(request.getParameter("email"));
+			//user.setPassword(request.getParameter("password"));
+			String passwordCheck = Facade.CheckPassword(email);
+			if (password.equals(passwordCheck)) { 
+				HttpSession session = request.getSession();
+				session.setAttribute("email",email);
 				response.sendRedirect("Home.jsp");
 				//logged-in page
 			}

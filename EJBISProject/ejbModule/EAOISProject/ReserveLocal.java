@@ -8,7 +8,8 @@ import ejbModule.Reserve;
 
 @Local
 public interface ReserveLocal {
-	public Reserve CreateReserve(Reserve reserve);
+	public void CreateReserve(Reserve reserve);
+	public void DeleteReserve(Reserve reserve);
 	public List<Reserve> PersonReserve(String id);
-
+	
 }

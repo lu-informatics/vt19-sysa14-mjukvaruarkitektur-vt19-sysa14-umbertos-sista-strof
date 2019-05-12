@@ -78,7 +78,8 @@ public class BookServlet extends HttpServlet {
     		JsonArrayBuilder array = Json.createArrayBuilder();
     		for(Book b: books) {
     			JsonObjectBuilder o = Json.createObjectBuilder();
-    			o.add("BookID", String.valueOf(b.getBookID()));
+    			o.add("Isbn", String.valueOf(b.getBookID().getisbn()));
+    			o.add("bookcopy", String.valueOf(b.getBookID().getbookcopy()));
     			o.add("title", b.getTitle());
     			o.add("author", b.getAuthor());
     			array.add(o);

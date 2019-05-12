@@ -10,8 +10,9 @@ bookRequest.send();
 function renderHTML(data){
 	var htmlString = "";
 	for(i = 0; i < data.length; i++){
-		htmlString += "<tr>" + "<td>" + data[i].title + "</td>" + "<td>" + data[i].author + "</td>";
-		htmlString += '<td><form action="/reserve" Method="Put"> <input type=submit value="Reserve"></form></td></tr>'
+		htmlString += "<tr> <td>" + data[i].title + "</td> <td>" + data[i].author + "</td> <td>";
+		htmlString += "<input type='text' value="+data[i].Isbn+" name='isbn' readonly></td>" + "<td> <input type='text' value="+data[i].bookcopy+" name='bookcopy' readonly></td>";
+		htmlString += '<td> <input type=submit value="Reserve"></td></tr>';
 	}
 	bookTable.insertAdjacentHTML('beforeend', htmlString);
-} 
+}

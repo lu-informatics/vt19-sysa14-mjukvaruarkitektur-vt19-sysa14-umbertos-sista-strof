@@ -3,7 +3,11 @@
 <html>
 <link href="css/Style.css" rel="stylesheet" type="text/css">
 <body>
-<%@ include file="html/Header.html" %>
+<% if (session.getAttribute("email") == null) { %>
+    <%@ include file="html/Header.html" %>
+<% } else {%>
+    <%@ include file="html/LoggedInHeader.jsp" %>
+<% } %>
     <div id="wrap">
         <div id="main">
             <table id="MainTable">

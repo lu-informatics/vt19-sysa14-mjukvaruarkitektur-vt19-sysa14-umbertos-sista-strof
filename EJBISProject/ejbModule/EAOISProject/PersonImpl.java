@@ -31,11 +31,12 @@ public class PersonImpl implements PersonLocal {
     	em.persist(person);
     	return person; 
     }
-    public Person CheckPassword(String email) {
+    public String CheckPassword(String email) {
     	TypedQuery<Person> query = em.createNamedQuery("Person.FindByEmail", Person.class);
     	query.setParameter("email", email);
-    	Person person = query.getSingleResult();
-    	return person; 
+    	Person person = query.getSingleResult(); 
+    	String password = person.getPassword();
+    	return password;
 
     }
     public String FindPersonID(String email) {

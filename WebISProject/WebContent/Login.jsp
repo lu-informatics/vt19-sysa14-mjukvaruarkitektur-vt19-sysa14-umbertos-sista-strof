@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="PersonServlet" Method="Get">
+<form action="LoginServlet" Method="Get">
 please enter your email
 <input type="text" name="email" id="email">
 please enter your password

@@ -9,13 +9,37 @@
 <title>Book JSP</title>
 </head>
 <body>
-<%@ include file="html/Header.html" %>
+<% if (session.getAttribute("email") == null) { %>
+    <%@ include file="html/Header.html" %>
+<% } else {%>
+    <%@ include file="html/LoggedInHeader.jsp" %>
+<% } %>
+<table id="searchbar" align="center">
+        <th colspan="2">
+        <td>
+
+            <form method="get">
+            <input type="text" name="txtSearchItem" id="bookText" value="Search book" />
+            </form>
+        </td>
+        </th>
+
+        <th>
+        	<td>
+            <form Method="Put"> 
+            <input type="submit" id = "searchButton" value="Search" />
+            </form>
+            </td>
+        </th>
+</table>
 	 <table id="books" align="center">
             <th colspan="2">Books</th>
             <tr>
                 <td>
+                <form action="ReserveServlet" Method="POST">
                    <table id = "bookTable">
 	</table> 
+	</form>
                 </td>
             </tr>
 </table>

@@ -21,15 +21,17 @@
     <li><a href="http://localhost:8080/WebISProject/About.jsp" class="PLACEHOLDER">About</a></li>
     <li><a href=# class="PLACEHOLDER">TEST</a></li>
     </u1>
-    Welcome, 
+    <% String email = (String) session.getAttribute("email");
+    out.println("Welcome, " + email);
+    %>
     <form action="LogoutServlet" Method="Get">
     <input type = "submit" id = "logout" name = "logout" value = "Log Out">
     </form>
     <div class="dropdown">
   <button class="dropbtn">Dropdown</button>
   <div class="dropdown-content">
-    <a href="#">Reservations</a>
-    <a href="#">Loans</a>
+    <a href="Reservations.jsp">Reservations</a>
+    <a href="Loans.jsp">Loans</a>
   </div>
 </div>
    

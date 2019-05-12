@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import FacadeISProject.FacadeLocal;
+import ejbModule.Book;
 import ejbModule.Loaning;
 import ejbModule.Reserve;
 
@@ -55,8 +56,20 @@ public class ReserveServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		Reserve reserve = new Reserve();
+		String email = request.getSession(false).getAttribute("email").toString();
+		reserve.setId(Facade.FindPersonID(email));
+		String isbn = request.getParameter("isbn");
+		String bookcopy = request.getParameter("bookcopy");
+		Book book = Facade.FindBookByID(isbn, bookcopy);
+		reserve.setBookID(book.getBookID());
+		try{
+			Facade.CreateReserve(reserve);
+			response.sendRedirect("Books.jsp");
+			}
+			catch(Exception e) {
+				System.out.println(e);
+			}
 	}
 
 
@@ -65,7 +78,7 @@ public class ReserveServlet extends HttpServlet {
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 	}
 	
 	private void sendAsJson(HttpServletResponse response, List<Reserve> reserves) throws IOException, ServletException {
@@ -75,8 +88,8 @@ public class ReserveServlet extends HttpServlet {
     		JsonArrayBuilder array = Json.createArrayBuilder();
     		for(Reserve r: reserves) {
     			JsonObjectBuilder o = Json.createObjectBuilder();
-    			o.add("BookID", String.valueOf(r.getBookID()));
-    			o.add("ID", r.getId());
+    			o.add("isbn", String.valueOf(r.getBookID().getisbn()));
+    			o.add("bookcopy", String.valueOf(r.getBookID().getbookcopy()));
     			array.add(o);
     		}
     		JsonArray jsonArray = array.build();

@@ -9,7 +9,7 @@ import ejbModule.Person;
 @Local
 public interface PersonLocal {
 	public Person CreatePerson(Person person);
-	public Person CheckPassword(String email);
+	public String CheckPassword(String email);
 	public String FindPersonID(String email);
 
 }

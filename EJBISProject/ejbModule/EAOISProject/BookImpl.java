@@ -46,6 +46,13 @@ public class BookImpl implements BookLocal {
     	return results;
     		
     }
+    public Book FindBookByID(String isbn, String bookcopy){
+    	TypedQuery<Book> query = em.createNamedQuery("Book.findByID", Book.class);
+    	query.setParameter("isbn", isbn);
+    	query.setParameter("bookcopy", bookcopy);
+    	Book book= query.getSingleResult();
+    	return book;
+    }
     
     
     

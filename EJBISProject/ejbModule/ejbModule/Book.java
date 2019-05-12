@@ -14,6 +14,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Book.findBookWithSearch", 
     		query = "SELECT b FROM Book b WHERE b.title LIKE :searchTerm OR b.author LIKE :searchTerm"),
     @NamedQuery(name = "Book.findAllBooks", query = "SELECT b FROM Book b"),
+    @NamedQuery(name = "Book.findByID", query = "SELECT b FROM Book b WHERE b.bookID.isbn = :isbn AND b.bookID.bookcopy = :bookcopy")
 
 })
 @Table(name="Book")
