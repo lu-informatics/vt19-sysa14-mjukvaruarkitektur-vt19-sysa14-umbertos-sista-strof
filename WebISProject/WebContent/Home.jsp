@@ -2,7 +2,6 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<link href="css/Style.css" rel="stylesheet" type="text/css">
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
 </script>
@@ -11,7 +10,7 @@
     
 
 <% if (session.getAttribute("email") == null) { %>
-    <%@ include file="html/Header.html" %>
+    <%@ include file="html/HeaderHomePage.html" %>
 <% } else {%>
     <%@ include file="html/LoggedInHeader.jsp" %>
 <% } %>

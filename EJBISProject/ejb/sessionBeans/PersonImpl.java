@@ -1,7 +1,4 @@
-package EAOISProject;
-
-import java.sql.SQLException;
-import java.util.List;
+package sessionBeans;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -9,41 +6,55 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import ejbModule.Person;
+import entities.Person;
 
-/**
- * Session Bean implementation class Person
- */
+
 @Stateless
 @LocalBean
 public class PersonImpl implements PersonLocal {
 	@PersistenceContext(unitName="ISEJBSql")
 	private EntityManager em;
+	String result = new String();
 
-    /**
-     * Default constructor. 
-     */
     public PersonImpl() {
-        // TODO Auto-generated constructor stub
     }
     
-    public Person CreatePerson(Person person) {
-    	em.persist(person);
-    	return person; 
+    //Create a person with persist
+    public void createPerson(Person person) {
+    	try {
+    	em.persist(person); 
+    	}
+    	catch (Exception e) {
+    		System.out.println(e);
+    	}
     }
-    public String CheckPassword(String email) {
+    
+    //Finds a password with email
+    public String checkPassword(String email) {
+    	try {
     	TypedQuery<Person> query = em.createNamedQuery("Person.FindByEmail", Person.class);
     	query.setParameter("email", email);
     	Person person = query.getSingleResult(); 
-    	String password = person.getPassword();
-    	return password;
+    	result = person.getPassword();
+    	}
+    	catch(Exception e) {
+    		System.out.println(e);
+    	}
+    	return result;
 
     }
-    public String FindPersonID(String email) {
+    
+    //Finds a persons ID with Email
+    public String findPersonID(String email) {
+    	try {
     	TypedQuery<Person> query = em.createNamedQuery("Person.FindByEmail", Person.class);
     	query.setParameter("email", email);
     	Person person = query.getSingleResult(); 
-    	String id = person.getId();
-    	return id;
+    	result = person.getId();
+    	}
+    	catch(Exception e){
+    		System.out.println(e);
+    	}
+    	return result;
     }
 }

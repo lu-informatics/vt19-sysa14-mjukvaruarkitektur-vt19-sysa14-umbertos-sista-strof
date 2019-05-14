@@ -16,10 +16,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import FacadeISProject.FacadeLocal;
-import ejbModule.Book;
-import ejbModule.Loaning;
-import ejbModule.Person;
+import entities.Book;
+import entities.Loaning;
+import entities.Person;
+import facade.FacadeLocal;
 
 /**
  * Servlet implementation class LoaningServlet

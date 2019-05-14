@@ -14,8 +14,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import FacadeISProject.FacadeLocal;
-import ejbModule.Book;
+
+import entities.Book;
+import facade.FacadeLocal;
 
 /**
  * Servlet implementation class ServletISProject
@@ -52,23 +53,7 @@ public class BookServlet extends HttpServlet {
     	String id = splits[1];
     	List <Book> book = Facade.SearchBook(id);
     	sendAsJson(response, book);
-    	/*String action = request.getParameter("submit");
-    	String pathinfo = request.getPathInfo();
-    	System.out.println(pathinfo);
-    	if(action != null) {
-    		if(action.equals("Search")) {
-    			String pathInfo = request.getParameter("Text");
-    				if(pathInfo == null || pathInfo.equals("")) {
-    					searchAllBooks(request,response);
-    				}
-    				else{
-    					searchBooks(request, response);
-    				}
-    			
-    		}
-    		
-    	}
-    	*/
+    
     }
     
     private void sendAsJson(HttpServletResponse response, List<Book> books) throws IOException, ServletException {
@@ -89,29 +74,10 @@ public class BookServlet extends HttpServlet {
     		out.print(jsonArray);
     	} 
     	else{
-    		out.print("[]");
+    		out.print("No Matches Found!");
     	}
     	out.flush();
     }
-    	/*response.setContentType("application/json");    
-    	if(books != null) {
-    		JsonArrayBuilder array = Json.createArrayBuilder();
-    		for(Book b: books) {
-    			JsonObjectBuilder o = Json.createObjectBuilder();
-    			o.add("BookID", String.valueOf(b.getBookID()));
-    			o.add("title", b.getTitle());
-    			o.add("author", b.getAuthor());
-    			array.add(o);
-    		}
-    		JsonArray jsonArray = array.build(); 		
-    		System.out.println("Book Rest: "+jsonArray);
-    		request.setAttribute("book", jsonArray);
-    		request.getRequestDispatcher("/Books.jsp").forward(request, response);		
-    	} 
-    	else{
-    		
-    	}*/
     
-    
-    }
+}
 

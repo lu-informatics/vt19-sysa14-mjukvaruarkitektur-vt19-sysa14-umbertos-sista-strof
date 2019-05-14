@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import FacadeISProject.FacadeLocal;
-import ejbModule.Person;
+import entities.Person;
+import facade.FacadeLocal;
 
 /**
  * Servlet implementation class LoginServlet
@@ -34,23 +34,22 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try { 
-			String email = request.getParameter("email");
-			String password = request.getParameter("password");
-			//user.setEmail(request.getParameter("email"));
-			//user.setPassword(request.getParameter("password"));
-			String passwordCheck = Facade.CheckPassword(email);
-			if (password.equals(passwordCheck)) { 
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		String passwordCheck = Facade.CheckPassword(email);
+		if (password.equals(passwordCheck)) {
+			try { 
 				HttpSession session = request.getSession();
 				session.setAttribute("email",email);
 				response.sendRedirect("Home.jsp");
 				//logged-in page
 			}
-			else response.sendRedirect("Login.jsp");
-			//error page 
+			catch (Exception e) {
+				System.out.println(e); 
 			}
-		catch (Throwable theException) {
-		System.out.println(theException); 
+		}
+		else {
+			response.sendRedirect("Login.jsp");	//error page 
 		}
 	}
 }

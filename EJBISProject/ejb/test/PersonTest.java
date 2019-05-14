@@ -1,6 +1,6 @@
-package ejbModule.test;
+package test;
 
-import ejbModule.Person;
+import entities.Person;
 import junit.framework.TestCase;
 
 public class PersonTest extends TestCase {

@@ -6,47 +6,105 @@
 <link rel="stylesheet" href="css/Style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<style>
+        background-color: lightgrey;
+    }
 
+    body, hi, h2, h3, h4, h5, h6, h7 {
+        font-family: "Lato", sans-serif
+    }
+
+    h1, button, fieldset {
+        font-family: "Montserrat", sans-serif
+
+    }
+  
+    .dropbtn {
+        background-color: #b78c55;
+        color: white;
+        padding: 14px;
+        font-size: 14px;
+        border: none;
+    }
+
+    .dropdown {
+        position: absolute;
+        display: inline-block;
+        top: 8px;
+        right: 8px;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        width: 100%;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 12;
+        }
+
+            .dropdown-content a:hover {
+                background-color: #ddd;
+            }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: black;
+    }
+
+    p {
+        position: absolute;
+        top: 8px;
+        right: 250px;
+    }
+  
+  </style>
 <body>
 
 
-<!-- Navbar -->
-<h7>
-<div class="PLACEHOLDER">
-  <div class="PLACEHOLDER">
-  <u1>
-    <li><a href="http://localhost:8080/WebISProject/Home.jsp" class="PLACEHOLDER">Home</a></li>
-    <li><a href="http://localhost:8080/WebISProject/Books.jsp" class="PLACEHOLDER">Books</a></li>
-    <li><a href=# class="PLACEHOLDER">Reservations</a></li>
-    <li><a href="http://localhost:8080/WebISProject/About.jsp" class="PLACEHOLDER">About</a></li>
-    <li><a href=# class="PLACEHOLDER">TEST</a></li>
-    </u1>
+ <!-- Header -->
+    <header>
+        <!-- Navbar -->
+        <h7>
+            <div class="PLACEHOLDER">
+                <div class="PLACEHOLDER">
+                    <u1>
+                        <li><a href="http://localhost:8080/WebISProject/Home.jsp">Home</a></li>
+                        <li><a href="http://localhost:8080/WebISProject/Books.jsp">Books</a></li>
+                        <li><a href="http://localhost:8080/WebISProject/About.jsp">About</a></li>
+                        <li><a href=# class="PLACEHOLDER">TEST</a></li>
+                    </u1>
+                     <p>Welcome, 
     <% String email = (String) session.getAttribute("email");
-    out.println("Welcome, " + email);
-    %>
-    <form action="LogoutServlet" Method="Get">
-    <input type = "submit" id = "logout" name = "logout" value = "Log Out">
-    </form>
-    <div class="dropdown">
-  <button class="dropbtn">Dropdown</button>
-  <div class="dropdown-content">
-    <a href="Reservations.jsp">Reservations</a>
-    <a href="Loans.jsp">Loans</a>
-  </div>
-</div>
-   
-  </div>
-</div>
-</h7>
+    out.println(email);
+    %></p>
+                    <div class="dropdown">
+                        <button class="dropbtn">My Page</button>
+                        <div class="dropdown-content">
+                            <a href="#">Reservations</a>
+                            <a href="#">Loans</a>
+                            <a href="http://localhost:8080/WebISProject/LogoutServlet.jsp">Log out</a>
+                        </div>
 
-<!-- Header -->
-<header>
-  <h1 class="PLACEHOLDER">WELCOME TO BIBLIO</h1>
-  <p class="PLACEHOLDER">The customer friendly library</p>
-  <button class="PLACEHOLDER">Get To Reading</button>
-</header>
+                    </div>
+                </div>
+        </h7>
+    </header>
+
 
 
 
 </body>
 </html>
+    

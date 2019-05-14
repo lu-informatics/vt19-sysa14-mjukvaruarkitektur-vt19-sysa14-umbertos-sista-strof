@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import FacadeISProject.FacadeLocal;
-import ejbModule.Person;
+import entities.Person;
+import facade.FacadeLocal;
 /**
  * Servlet implementation class PersonServlet
  */
@@ -38,7 +38,6 @@ public class PersonServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		checkPassword(request, response);
 	}
 
 	/**
@@ -52,8 +51,6 @@ public class PersonServlet extends HttpServlet {
 		person.setEmail(request.getParameter("email"));
 		person.setPhone(request.getParameter("phone"));
 		person.setPassword(request.getParameter("password"));
-		System.out.println(person.getFirstname());
-		System.out.println(person.getId());
 		try{
 		Facade.CreatePerson(person);
 		response.sendRedirect("Login.jsp");
@@ -62,16 +59,4 @@ public class PersonServlet extends HttpServlet {
 			System.out.println(e);
 		}
 	}
-
-	/**
-	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
-	 */
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-	
-	private void checkPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-
 }

@@ -1,4 +1,4 @@
-package ejbModule;
+package entities;
 
 import java.io.Serializable;
 

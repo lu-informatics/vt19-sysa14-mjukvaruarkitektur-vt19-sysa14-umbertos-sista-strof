@@ -1,4 +1,4 @@
-package EAOISProject;
+package sessionBeans;
 
 import java.util.List;
 
@@ -8,30 +8,32 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import ejbModule.Loaning;
-import ejbModule.Reserve;
+import entities.Loaning;
 
-/**
- * Session Bean implementation class LoaningImpl
- */
+
 @Stateless
 @LocalBean
 public class LoaningImpl implements LoaningLocal {
 	@PersistenceContext(unitName="ISEJBSql")
 	private EntityManager em;
+	List<Loaning> results = null;
 
-    /**
-     * Default constructor. 
-     */
     public LoaningImpl() {
-        // TODO Auto-generated constructor stub
+
     }
     
-    public List<Loaning> PersonLoans(String id){
+    //Find all loans that belongs to a person with ID
+    public List<Loaning> personLoans(String id){
+    	try {
     	TypedQuery<Loaning> query = em.createNamedQuery("Loaning.findLoan", Loaning.class);
     	query.setParameter("PersonID", id);
-    	List<Loaning> results = query.getResultList();
+    	results = query.getResultList();
+    	}
+    	catch(Exception e) {
+    		System.out.println(e);
+    	}
     	return results;
+    	
     }
 
 }

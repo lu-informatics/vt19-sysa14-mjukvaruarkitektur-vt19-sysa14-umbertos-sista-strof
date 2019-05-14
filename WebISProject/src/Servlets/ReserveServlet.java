@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import FacadeISProject.FacadeLocal;
-import ejbModule.Book;
-import ejbModule.Loaning;
-import ejbModule.Reserve;
+import entities.Book;
+import entities.Loaning;
+import entities.Reserve;
+import facade.FacadeLocal;
 
 /**
  * Servlet implementation class ReserveServlet

@@ -1,4 +1,4 @@
-package ejbModule.test;
+package test;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;

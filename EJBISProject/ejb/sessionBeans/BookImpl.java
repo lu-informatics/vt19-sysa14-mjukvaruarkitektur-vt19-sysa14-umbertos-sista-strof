@@ -1,22 +1,16 @@
-package EAOISProject;
+package sessionBeans;
 
 import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import ejbModule.Book;
+import entities.Book;
 
-import ejbModule.BookID;
 
-/**
- * Session Bean implementation class BookImpl
- */ 
 
 
 @Stateless
@@ -24,36 +18,50 @@ import ejbModule.BookID;
 public class BookImpl implements BookLocal {
 	@PersistenceContext(unitName="ISEJBSql")
 	private EntityManager em;
+	List<Book> results = null;
+	Book book = new Book();
 
-    /**
-     * Default constructor. 
-     */
     public BookImpl() {
-        // TODO Auto-generated constructor stub
     }
     
-   
-    public List<Book> SearchBook(String searchTerm){
+   //Find book by searching form title or author
+    public List<Book> searchBook(String searchTerm){
+    	try {
     	TypedQuery<Book> query = em.createNamedQuery("Book.findBookWithSearch", Book.class);
     	query.setParameter("searchTerm", "%" + searchTerm + "%");
-    	List<Book> results = query.getResultList();
+    	results = query.getResultList();
+    	}
+    	catch (Exception e){
+    		System.out.println(e);
+    	}
     	return results;
     }
     
-    public List<Book> FindAllBooks(){
+    //Find and return all books
+    public List<Book> findAllBooks(){
+    	try {
     	TypedQuery<Book> query = em.createNamedQuery("Book.findAllBooks", Book.class);
-    	List<Book> results = query.getResultList();
+    	results = query.getResultList();
     	return results;
-    		
+    	}
+    	catch (Exception e) {
+    		System.out.println(e);
+    	}
+    	return results;
+    	
     }
-    public Book FindBookByID(String isbn, String bookcopy){
+    
+    //Find a book with is ID(isbn, bookcopy)
+    public Book findBookByID(String isbn, String bookcopy){
+    	try {
     	TypedQuery<Book> query = em.createNamedQuery("Book.findByID", Book.class);
     	query.setParameter("isbn", isbn);
     	query.setParameter("bookcopy", bookcopy);
-    	Book book= query.getSingleResult();
+    	book = query.getSingleResult();
+    	}
+    	catch(Exception e) {
+    		System.out.println(e);
+    	}
     	return book;
     }
-    
-    
-    
 }
