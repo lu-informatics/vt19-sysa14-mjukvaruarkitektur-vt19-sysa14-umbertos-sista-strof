@@ -56,6 +56,7 @@ public class ReserveServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(request.getParameter("create") != null) {
 		Reserve reserve = new Reserve();
 		String email = request.getSession(false).getAttribute("email").toString();
 		reserve.setId(Facade.FindPersonID(email));
@@ -70,6 +71,23 @@ public class ReserveServlet extends HttpServlet {
 			catch(Exception e) {
 				System.out.println(e);
 			}
+		}
+		else if(request.getParameter("delete") != null) {
+			Reserve reserve = new Reserve();
+			String email = request.getSession(false).getAttribute("email").toString();
+			reserve.setId(Facade.FindPersonID(email));
+			String isbn = request.getParameter("isbn");
+			String bookcopy = request.getParameter("bookcopy");
+			Book book = Facade.FindBookByID(isbn, bookcopy);
+			reserve.setBookID(book.getBookID());
+			try {
+				Facade.DeleteReserve(reserve);
+				response.sendRedirect("Reservations.jsp");
+			}
+			catch(Exception e) {
+				System.out.println(e);
+			}
+		}
 	}
 
 

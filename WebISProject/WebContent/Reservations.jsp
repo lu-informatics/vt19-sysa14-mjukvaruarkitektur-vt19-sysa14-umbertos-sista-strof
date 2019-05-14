@@ -16,10 +16,8 @@
             <th colspan="2">Reservations</th>
             <tr>
                 <td>
-                <form action="ReserveServlet" Method="DELETE">
-                   <table id = "reserveTable">
-	</table> 
-	</form>
+                   <div class = table id = "reserveTable">
+	</div> 
                 </td>
             </tr>
 </table>

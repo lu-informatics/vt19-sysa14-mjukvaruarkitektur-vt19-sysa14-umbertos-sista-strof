@@ -47,12 +47,12 @@ public class PersonServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Person person = new Person();
 		person.setId(UUID.randomUUID().toString());
-		person.setFirstsname(request.getParameter("firstname"));
+		person.setFirstname(request.getParameter("firstname"));
 		person.setLastname(request.getParameter("lastname"));
 		person.setEmail(request.getParameter("email"));
 		person.setPhone(request.getParameter("phone"));
 		person.setPassword(request.getParameter("password"));
-		System.out.println(person.getFirstsname());
+		System.out.println(person.getFirstname());
 		System.out.println(person.getId());
 		try{
 		Facade.CreatePerson(person);

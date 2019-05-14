@@ -11,8 +11,8 @@ bookRequest.send();
 function renderHTML(data){
 	var htmlString = "";
 	for(i = 0; i < data.length; i++){
-		htmlString += "<tr><td><input type='text' value="+data[i].isbn+" name='isbn' readonly></td>" + "<td> <input type='text' value="+data[i].bookcopy+" name='bookcopy' readonly></td>";
-		htmlString += '<td> <input type=submit value="Remove"></td></tr>';
+		htmlString += "<form class='tr' method='post' action='ReserveServlet'><span class='td'><input type='text' value="+data[i].isbn+" name='isbn' readonly/></span>"
+        htmlString += "<span class='td'><input type='text' value="+data[i].bookcopy+" name='bookcopy' readonly/></span><span class='td'><input type=submit name='delete' value='Delete'/></span></form>"
 	}
 	bookTable.insertAdjacentHTML('beforeend', htmlString);
 }

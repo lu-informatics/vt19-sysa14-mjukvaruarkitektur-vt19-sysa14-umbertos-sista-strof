@@ -32,7 +32,8 @@ public class ReserveImpl implements ReserveLocal {
     	
     }
     public void DeleteReserve(Reserve reserve) {
-    	em.remove(reserve);
+    	Reserve reserved = em.find(Reserve.class, reserve.getBookID());
+    	em.remove(reserved);
     }
     
     public List<Reserve> PersonReserve(String id){

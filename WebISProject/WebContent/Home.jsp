@@ -19,14 +19,19 @@
         
                 <div id="wrap">
                     <div id="main">
-                                <form action="Books" method="Get">
-                                    <h1>Search Book</h1>
-                                    <input type="text" name="Text" id="SearchText" />
-                                    <input type="submit" name="submit" value="Search" id="submit" />
-                                </form>
+                                <table id = "asideTable">
+                                <tr>
+                               	<th><span id="city"></span></th>
+                               	<th><span id="ipNbr"></span></th>
+                                </tr>
+                                
+                               
+                                </table>
                                 
                     </div>
+                    
                 </div>
                 <%@ include file="html/Footer.html" %>
         </body>
 </html>
+<script src = "js/WeatherAPI.js"></script>

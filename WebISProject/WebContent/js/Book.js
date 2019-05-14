@@ -1,4 +1,4 @@
-var bookTable = document.getElementById("bookTable");
+var bookTable = document.getElementById("table");
 var bookRequest = new XMLHttpRequest();
 bookRequest.open('GET', 'http://localhost:8080/WebISProject/BookServlet/');
 bookRequest.onload = function(){
@@ -10,9 +10,22 @@ bookRequest.send();
 function renderHTML(data){
 	var htmlString = "";
 	for(i = 0; i < data.length; i++){
-		htmlString += "<tr> <td>" + data[i].title + "</td> <td>" + data[i].author + "</td> <td>";
-		htmlString += "<input type='text' value="+data[i].Isbn+" name='isbn' readonly></td>" + "<td> <input type='text' value="+data[i].bookcopy+" name='bookcopy' readonly></td>";
-		htmlString += '<td> <input type=submit value="Reserve"></td></tr>';
+		 htmlString += "<div class='tr'><span class='td'> Title: "+data[i].title+"</span><span class='td'> Author: "+data[i].author+"</span></div>";
+		htmlString += "<form class='tr' method='post' action='ReserveServlet'><span class='td'>ISBN: <span class='td'><input type='text' value="+data[i].Isbn+" name='isbn' readonly/></span>"
+        htmlString += "<span class='td'><input type='text' value="+data[i].bookcopy+" name='bookcopy' readonly/></span><span class='td'><input type=submit name='create' value='Reserve'/></span></form>"
 	}
 	bookTable.insertAdjacentHTML('beforeend', htmlString);
-}
+	}
+
+document.getElementById("search").onclick = function search(){
+	document.getElementById("table").innerHTML = "";
+	var searchText = document.getElementById("bookText").value;
+	var bookRequest = new XMLHttpRequest();
+	bookRequest.open('GET', 'http://localhost:8080/WebISProject/BookServlet/'+searchText);
+	bookRequest.onload = function(){
+		var bookData = JSON.parse(bookRequest.responseText);
+		renderHTML(bookData);
+	};
+	bookRequest.send();
+};
+
