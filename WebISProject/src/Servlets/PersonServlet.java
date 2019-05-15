@@ -52,7 +52,7 @@ public class PersonServlet extends HttpServlet {
 		person.setPhone(request.getParameter("phone"));
 		person.setPassword(request.getParameter("password"));
 		try{
-		Facade.CreatePerson(person);
+		Facade.createPerson(person);
 		response.sendRedirect("Login.jsp");
 		}
 		catch(Exception e) {

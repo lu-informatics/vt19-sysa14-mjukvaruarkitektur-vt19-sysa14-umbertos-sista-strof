@@ -34,22 +34,22 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		String passwordCheck = Facade.CheckPassword(email);
-		if (password.equals(passwordCheck)) {
-			try { 
+		try { 
+			String email = request.getParameter("email");
+			String password = request.getParameter("password");
+			String passwordCheck = Facade.checkPassword(email);
+			if (password.equals(passwordCheck)) {
 				HttpSession session = request.getSession();
 				session.setAttribute("email",email);
 				response.sendRedirect("Home.jsp");
 				//logged-in page
 			}
-			catch (Exception e) {
-				System.out.println(e); 
+			else {
+				response.sendRedirect("LoginError.jsp");	//error page 
 			}
 		}
-		else {
-			response.sendRedirect("Login.jsp");	//error page 
+		catch (Exception e) {
+			response.sendRedirect("LoginError.jsp"); //error page
 		}
 	}
 }

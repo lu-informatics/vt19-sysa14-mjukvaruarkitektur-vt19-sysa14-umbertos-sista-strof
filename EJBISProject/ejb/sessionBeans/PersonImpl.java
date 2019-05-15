@@ -21,40 +21,24 @@ public class PersonImpl implements PersonLocal {
     
     //Create a person with persist
     public void createPerson(Person person) {
-    	try {
-    	em.persist(person); 
-    	}
-    	catch (Exception e) {
-    		System.out.println(e);
-    	}
+    	em.persist(person);
     }
     
     //Finds a password with email
     public String checkPassword(String email) {
-    	try {
     	TypedQuery<Person> query = em.createNamedQuery("Person.FindByEmail", Person.class);
     	query.setParameter("email", email);
     	Person person = query.getSingleResult(); 
     	result = person.getPassword();
-    	}
-    	catch(Exception e) {
-    		System.out.println(e);
-    	}
     	return result;
-
     }
     
     //Finds a persons ID with Email
     public String findPersonID(String email) {
-    	try {
     	TypedQuery<Person> query = em.createNamedQuery("Person.FindByEmail", Person.class);
     	query.setParameter("email", email);
     	Person person = query.getSingleResult(); 
     	result = person.getId();
-    	}
-    	catch(Exception e){
-    		System.out.println(e);
-    	}
     	return result;
     }
 }

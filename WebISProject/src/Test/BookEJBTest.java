@@ -24,7 +24,7 @@ public class BookEJBTest extends TestCase {
 	public void testMethod() {
 		//Assert.assertNotNull(book);
 		//List<Book> books = book.FindAllBooks();
-		Assert.assertNull(book.FindAllBooks());
+		Assert.assertNull(book.findAllBooks());
 	}
 	
 	protected void tearDown() throws Exception {

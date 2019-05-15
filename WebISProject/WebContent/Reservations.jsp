@@ -4,8 +4,38 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Reservations</title>
 </head>
+<style>
+#books{
+width:50%;
+}
+.wraper{
+	width:100%;
+            margin: 0 auto;
+            }
+
+#inputText{
+float:left;
+width:75%;
+height:50px;
+left:10px;
+margin-bottom:5px;
+font-family: "lato",sans-riff;
+font-size: 20px;
+}
+#inputButton{
+float:right;
+width:20%;
+height:50px;
+background-color: black;
+color: white;
+border: none;
+cursor: pointer;
+text-align:center;
+margin-bottom:5px;
+}
+</style>
 <body>
 <% if (session.getAttribute("email") == null) { %>
     <% response.sendRedirect("http://localhost:8080/WebISProject/Home.jsp"); %>
@@ -16,8 +46,10 @@
             <th colspan="2">Reservations</th>
             <tr>
                 <td>
-                   <div class = table id = "reserveTable">
+                <div class="wraper" align=center>
+                   <div id = "reserveTable">
 	</div> 
+	</div>
                 </td>
             </tr>
 </table>

@@ -26,42 +26,25 @@ public class BookImpl implements BookLocal {
     
    //Find book by searching form title or author
     public List<Book> searchBook(String searchTerm){
-    	try {
     	TypedQuery<Book> query = em.createNamedQuery("Book.findBookWithSearch", Book.class);
     	query.setParameter("searchTerm", "%" + searchTerm + "%");
     	results = query.getResultList();
-    	}
-    	catch (Exception e){
-    		System.out.println(e);
-    	}
     	return results;
     }
     
     //Find and return all books
     public List<Book> findAllBooks(){
-    	try {
     	TypedQuery<Book> query = em.createNamedQuery("Book.findAllBooks", Book.class);
     	results = query.getResultList();
     	return results;
-    	}
-    	catch (Exception e) {
-    		System.out.println(e);
-    	}
-    	return results;
-    	
     }
     
     //Find a book with is ID(isbn, bookcopy)
     public Book findBookByID(String isbn, String bookcopy){
-    	try {
     	TypedQuery<Book> query = em.createNamedQuery("Book.findByID", Book.class);
     	query.setParameter("isbn", isbn);
     	query.setParameter("bookcopy", bookcopy);
     	book = query.getSingleResult();
-    	}
-    	catch(Exception e) {
-    		System.out.println(e);
-    	}
     	return book;
     }
 }

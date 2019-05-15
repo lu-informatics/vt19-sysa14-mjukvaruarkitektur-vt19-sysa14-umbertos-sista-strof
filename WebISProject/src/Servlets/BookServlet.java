@@ -40,7 +40,7 @@ public class BookServlet extends HttpServlet {
     	if(pathInfo == null|| pathInfo.equals("/")){
     		System.out.println("Alla");
     		System.out.println(pathInfo);
-    		List<Book> books = Facade.FindAllBooks();
+    		List<Book> books = Facade.findAllBooks();
     		sendAsJson(response, books);
     		return;
     	}
@@ -51,7 +51,7 @@ public class BookServlet extends HttpServlet {
     		return;
     	}
     	String id = splits[1];
-    	List <Book> book = Facade.SearchBook(id);
+    	List <Book> book = Facade.searchBook(id);
     	sendAsJson(response, book);
     
     }

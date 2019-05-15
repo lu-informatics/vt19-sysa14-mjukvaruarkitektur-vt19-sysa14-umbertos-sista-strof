@@ -3,10 +3,10 @@
 <title>W3.CSS Template</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/Style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <style>
+	body{
         background-color: lightgrey;
     }
 
@@ -18,13 +18,43 @@
         font-family: "Montserrat", sans-serif
 
     }
+    
+    u1 {
+        list-style-type: none;
+        margin: 0px;
+        padding: 0px;
+        overflow: hidden;
+        background-color: #b78c55;
+        top: 8px;
+        left: 8px;
+        position: absolute;
+        float: left;
+    }
+    li {
+        float: left;
+        
+    }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 13px 15px;
+            text-decoration: none;
+        }
+
+            /* Change the link color to #111 (black) on hover */
+            li a:hover {
+                background-color: #111;
+            }
   
     .dropbtn {
         background-color: #b78c55;
         color: white;
-        padding: 14px;
+        padding: 14px 15px;
         font-size: 14px;
         border: none;
+        Width:120px;
     }
 
     .dropdown {
@@ -32,6 +62,7 @@
         display: inline-block;
         top: 8px;
         right: 8px;
+        float: right;
     }
 
     .dropdown-content {
@@ -49,6 +80,7 @@
             text-decoration: none;
             display: block;
             font-size: 12;
+            text-align: center;
         }
 
             .dropdown-content a:hover {
@@ -61,12 +93,19 @@
 
     .dropdown:hover .dropbtn {
         background-color: black;
+        padding: 14px 15px;
     }
 
     p {
         position: absolute;
         top: 8px;
         right: 250px;
+        color: white;
+    }
+    header {
+        background-color: #b78c55;
+        text-align: center;
+        padding: 23px;
     }
   
   </style>
@@ -83,7 +122,7 @@
                         <li><a href="http://localhost:8080/WebISProject/Home.jsp">Home</a></li>
                         <li><a href="http://localhost:8080/WebISProject/Books.jsp">Books</a></li>
                         <li><a href="http://localhost:8080/WebISProject/About.jsp">About</a></li>
-                        <li><a href=# class="PLACEHOLDER">TEST</a></li>
+                        <li><a href="http://localhost:8080/WebISProject/Test.jsp">TEST</a></li>
                     </u1>
                      <p>Welcome, 
     <% String email = (String) session.getAttribute("email");
@@ -92,9 +131,9 @@
                     <div class="dropdown">
                         <button class="dropbtn">My Page</button>
                         <div class="dropdown-content">
-                            <a href="#">Reservations</a>
-                            <a href="#">Loans</a>
-                            <a href="http://localhost:8080/WebISProject/LogoutServlet.jsp">Log out</a>
+                            <a href="http://localhost:8080/WebISProject/Reservations.jsp">Reservations</a>
+                            <a href="http://localhost:8080/WebISProject/Loans.jsp">Loans</a>
+                            <a href="http://localhost:8080/WebISProject/LogoutServlet">Log out</a>
                         </div>
 
                     </div>

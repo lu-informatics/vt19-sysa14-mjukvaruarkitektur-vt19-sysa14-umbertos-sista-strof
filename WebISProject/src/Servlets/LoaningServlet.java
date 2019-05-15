@@ -41,9 +41,9 @@ public class LoaningServlet extends HttpServlet {
 		String[] splits = pathInfo.split("/");
 		String email = splits[1];
 		//out.println(pathInfo);
-		String id = Facade.FindPersonID(email);
+		String id = Facade.findPersonID(email);
 		//out.println(id);
-		List<Loaning> loans = Facade.PersonLoans(id);
+		List<Loaning> loans = Facade.personLoans(id);
 		sendAsJson(response, loans);
 		return;
 		

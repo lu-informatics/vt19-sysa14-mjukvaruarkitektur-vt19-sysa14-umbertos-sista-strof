@@ -24,14 +24,9 @@ public class LoaningImpl implements LoaningLocal {
     
     //Find all loans that belongs to a person with ID
     public List<Loaning> personLoans(String id){
-    	try {
     	TypedQuery<Loaning> query = em.createNamedQuery("Loaning.findLoan", Loaning.class);
     	query.setParameter("PersonID", id);
     	results = query.getResultList();
-    	}
-    	catch(Exception e) {
-    		System.out.println(e);
-    	}
     	return results;
     	
     }
