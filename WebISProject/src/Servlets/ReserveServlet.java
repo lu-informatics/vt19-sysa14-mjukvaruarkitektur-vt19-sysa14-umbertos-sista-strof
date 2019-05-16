@@ -2,6 +2,7 @@ package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -57,48 +58,46 @@ public class ReserveServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameter("create") != null) {
-		Reserve reserve = new Reserve();
-		String email = request.getSession(false).getAttribute("email").toString();
-		reserve.setId(Facade.findPersonID(email));
-		String isbn = request.getParameter("isbn");
-		String bookcopy = request.getParameter("bookcopy");
-		Book book = Facade.findBookByID(isbn, bookcopy);
-		reserve.setBookID(book.getBookID());
-		try{
-			Facade.createReserve(reserve);
-			response.sendRedirect("Books.jsp");
+			if(request.getParameter("create") != null) {
+				try {
+					Reserve reserve = new Reserve();
+					String email = request.getSession(false).getAttribute("email").toString();
+					reserve.setId(Facade.findPersonID(email));
+					String isbn = request.getParameter("isbn");
+					String bookcopy = request.getParameter("bookcopy");
+					Book book = Facade.findBookByID(isbn, bookcopy);
+					reserve.setBookID(book.getBookID());
+					Facade.createReserve(reserve);
+					response.sendRedirect("BooksSuccess.jsp");	
+				}
+				catch(Exception e) {
+					throw new EJBTransactionRolledbackException("Reserve");
+				}
 			}
-			catch(EJBTransactionRolledbackException e) {
-				throw new EJBTransactionRolledbackException("already reserved");
+			else if(request.getParameter("delete") != null) {
+				try {
+					Reserve reserve = new Reserve();
+					String email = request.getSession(false).getAttribute("email").toString();
+					reserve.setId(Facade.findPersonID(email));
+					String isbn = request.getParameter("isbn");
+					String bookcopy = request.getParameter("bookcopy");
+					Book book = Facade.findBookByID(isbn, bookcopy);
+					reserve.setBookID(book.getBookID());
+					Facade.deleteReserve(reserve);
+					response.sendRedirect("Reservations.jsp");
+				}
+				catch(Exception e) {
+					throw e;
 			}
-		}
-		else if(request.getParameter("delete") != null) {
-			Reserve reserve = new Reserve();
-			String email = request.getSession(false).getAttribute("email").toString();
-			reserve.setId(Facade.findPersonID(email));
-			String isbn = request.getParameter("isbn");
-			String bookcopy = request.getParameter("bookcopy");
-			Book book = Facade.findBookByID(isbn, bookcopy);
-			reserve.setBookID(book.getBookID());
-			try {
-				Facade.deleteReserve(reserve);
-				response.sendRedirect("Reservations.jsp");
-			}
-			catch(Exception e) {
-				System.out.println(e);
-			}
-		}
+		}		
 	}
+	
 
 
 
 	/**
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
 	
 	private void sendAsJson(HttpServletResponse response, List<Reserve> reserves) throws IOException, ServletException {
     	PrintWriter out = response.getWriter();

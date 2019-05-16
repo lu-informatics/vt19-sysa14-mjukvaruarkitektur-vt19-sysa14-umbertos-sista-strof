@@ -18,6 +18,11 @@ public class ErrorHandling extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         handleRequest(request, response);
     }
+    
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        handleRequest(request, response);
+    }
+    
  
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
  
@@ -34,11 +39,23 @@ public class ErrorHandling extends HttpServlet {
         if (requestUri == null) {
             requestUri = "Unknown";
         }
+        
+        if(throwable.getMessage() == "Reserve") {
+        	response.sendRedirect("BooksError.jsp");
+        }
+        else if(throwable.getMessage() == "Person") {
+        	response.sendRedirect("CreatePersonError.jsp");
+        }
+        else if(throwable.getMessage() == "Login") {
+        	response.sendRedirect("LoginError.jsp");
+        }
+        else {
  
         /***** Set Response Content Type *****/
-        response.setContentType("text/html");
+        //response.setContentType("text/html");
  
         /***** Print The Response *****/
+        
         PrintWriter out = response.getWriter();
         String title = "Error/Exception Information";       
         String docType = "<!DOCTYPE html>\n";
@@ -47,11 +64,13 @@ public class ErrorHandling extends HttpServlet {
  
         if (throwable == null && statusCode == null) {
             out.println("<h3>Error Information Is Missing</h3>");           
-        } else if (statusCode != 500) {
+        } 
+        else if (statusCode != 500) {
             out.write("<h3>Error Details</h3>");
             out.write("<ul><li><strong>Status Code</strong>?= "+ statusCode + "</li>");
             out.write("<li><strong>Requested URI</strong>?= "+ requestUri + "</li></ul>");
-        } else {
+        }
+        else {
             out.println("<h3>Exception Details</h3>");
             out.println("<ul><li><strong>Servlet Name</strong>?= " + servletName + "</li>");
             out.println("<li><strong>Exception Name</strong>?= " + throwable.getClass( ).getName( ) + "</li>");
@@ -59,8 +78,9 @@ public class ErrorHandling extends HttpServlet {
             out.println("<li><strong>Exception Message</strong>?= " + throwable.getMessage( ) + "</li></ul>");
         }
  
-        out.println("<div> </div>Click <a id=\"homeUrl\" href=\"index.jsp\">home</a>");
+        out.println("<div> </div>Click <a id=\"homeUrl\" href=\"Home.jsp\">home</a>");
         out.println("</body>\n</html>");
         out.close();
+        }
     }
 }

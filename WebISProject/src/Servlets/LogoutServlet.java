@@ -27,15 +27,13 @@ public class LogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	try {
-		HttpSession session = request.getSession();
-		session.invalidate();
-		response.sendRedirect("Home.jsp");
+		try {
+			HttpSession session = request.getSession();
+			session.invalidate();
+			response.sendRedirect("Home.jsp");
+		}
+		catch (Exception e) {
+			throw e;
+		}
 	}
-	catch (Throwable theException) {
-		System.out.println(theException);
-	}
-	}
-
-
 }

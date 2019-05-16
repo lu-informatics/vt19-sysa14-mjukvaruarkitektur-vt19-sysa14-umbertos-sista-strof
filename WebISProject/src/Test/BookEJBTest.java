@@ -20,7 +20,6 @@ public class BookEJBTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		Context context = new InitialContext();
-
 		book =(BookLocal)context.lookup("java:app/EJBISProject/BookImpl!sessionBeans.BookLocal");
 
 	}

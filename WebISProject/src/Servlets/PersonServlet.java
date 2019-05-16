@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.ejb.EJB;
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -26,37 +27,25 @@ public class PersonServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     @EJB
 	FacadeLocal Facade;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public PersonServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Person person = new Person();
-		person.setId(UUID.randomUUID().toString());
-		person.setFirstname(request.getParameter("firstname"));
-		person.setLastname(request.getParameter("lastname"));
-		person.setEmail(request.getParameter("email"));
-		person.setPhone(request.getParameter("phone"));
-		person.setPassword(request.getParameter("password"));
 		try{
-		Facade.createPerson(person);
-		response.sendRedirect("Login.jsp");
+			Person person = new Person();
+			person.setId(UUID.randomUUID().toString());
+			person.setFirstname(request.getParameter("firstname"));
+			person.setLastname(request.getParameter("lastname"));
+			person.setEmail(request.getParameter("email"));
+			person.setPhone(request.getParameter("phone"));
+			person.setPassword(request.getParameter("password"));
+			Facade.createPerson(person);
+			response.sendRedirect("Home.jsp");
 		}
 		catch(Exception e) {
-			System.out.println(e);
+			throw new EJBTransactionRolledbackException("Person");
 		}
 	}
 }
