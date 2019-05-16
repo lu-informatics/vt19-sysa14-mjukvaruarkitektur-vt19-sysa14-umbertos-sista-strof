@@ -1,9 +1,12 @@
 package Test;
 
 
+import java.util.List;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
+import entities.Book;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 import sessionBeans.BookLocal;
@@ -18,13 +21,12 @@ public class BookEJBTest extends TestCase {
 		super.setUp();
 		Context context = new InitialContext();
 
-		book =(BookLocal)context.lookup("java:app/EJBISProject/BookImpl!EAOISProject.BookLocal");
+		book =(BookLocal)context.lookup("java:app/EJBISProject/BookImpl!sessionBeans.BookLocal");
 
 	}
 	public void testMethod() {
-		//Assert.assertNotNull(book);
-		//List<Book> books = book.FindAllBooks();
-		Assert.assertNull(book.findAllBooks());
+		List<Book> books = book.findAllBooks();
+		Assert.assertFalse(books.isEmpty());
 	}
 	
 	protected void tearDown() throws Exception {

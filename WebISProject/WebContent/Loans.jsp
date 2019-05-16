@@ -20,8 +20,8 @@ width:100%;
 background-color:white;
 width:100%;
 table-layout: fixed;
-height:40px;
-outline: thin solid black;
+height:60px;
+outline: thin solid darkgrey;
 margin-bottom:5px;
 
 }

@@ -36,6 +36,7 @@ public class BookServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    	try {
     	String pathInfo = request.getPathInfo();
     	if(pathInfo == null|| pathInfo.equals("/")){
     		System.out.println("Alla");
@@ -53,6 +54,10 @@ public class BookServlet extends HttpServlet {
     	String id = splits[1];
     	List <Book> book = Facade.searchBook(id);
     	sendAsJson(response, book);
+    	}
+    	catch(Exception e) {
+    		throw e;
+    	}
     
     }
     
