@@ -3,38 +3,95 @@
 <html lang="sv">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/Style.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<style>
+#createAccountTable{
+	width:50%
+}
+#createAccountTable tr td{
+text-align:center;
+}
+#text{
+float:right;
+width:50%;
+height:40px;
+}
+#label{
+float:left;
+text-align:center;
+height:40px;
+}
+
+.registerbtn{
+ background-color: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-align:center;
+            height:40px;
+            width:20%;
+            margin-top: 25px;
+
+}
+#button{
+text-align:center;
+}
+.container{
+text-align : center;
+}
+</style>
 
 <body>
-<%@ include file="html/Header.html" %>
+<% if (session.getAttribute("email") == null) { %>
+	<%@ include file="html/Header.html" %>
+<% } else {%>
+    <% response.sendRedirect("http://localhost:8080/WebISProject/Home.jsp"); %>
+<% } %>
     <form action="PersonServlet" Method="Post">
         <div class="container">
-            <h1> Register</h1>
+            <h1> Register </h1>
             <p> Please fill in this form to create an account.</p>
             <hr>
-
-            <label for="firstname"> <b> Firstname</b> </label>
-            <input type="text" placeholder="Enter Firstname" name="firstname" required>
-
-            <label for="lastname"> <b> Lastname</b> </label>
-            <input type="text" placeholder="Enter Lastname" name="lastname" required>
-
-            <label for="email"> <b> Email</b> </label>
-            <input type="text" placeholder="Enter Email" name="email">
-
-            <label for="phone"> <b> Phonenumber</b> </label>
-            <input type="text" placeholder="Enter Phonenumber" name="phone">
-
-            <label for="password"> <b> Password</b> </label>
-            <input type="password" placeholder="Enter Password" name="password" required>
-
-            <label for="psw-repeat"> <b> Repeat Password</b> </label>
-            <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+			<table id="createAccountTable" align=center>
+				<tr>
+					<td>
+            			<label for="firstname" id="label"> <b> Firstname:</b> </label>
+           				<input type="text" id="text" placeholder="Enter Firstname" name="firstname" required>
+					</td>
+				</tr>
+				<tr>
+					<td>
+            			<label for="lastname" id="label"> <b> Lastname:</b> </label>
+            			<input type="text" id="text" placeholder="Enter Lastname" name="lastname" required>
+					</td>
+				</tr>
+				<tr>
+					<td>
+            			<label for="email" id="label"> <b> Email:</b> </label>
+            			<input type="text" id="text" placeholder="Enter Email" name="email">				
+					</td>
+				</tr>
+				<tr>
+					<td>
+            			<label for="phone" id="label"> <b> Phonenumber:</b> </label>
+            			<input type="text" id="text" placeholder="Enter Phonenumber" name="phone">
+					</td>
+				</tr>
+				<tr>
+					<td>
+            			<label for="password" id="label"> <b> Password:</b> </label>
+            			<input type="password" id="text" placeholder="Enter Password" name="password" required>
+					</td>
+				</tr>
+				<tr>
+					<td id= "button">
+            			<button type="submit" class="registerbtn"> Register</button>
+					</td>
+				</tr>
+				
+			</table>
             <hr>
-
-            <button type="submit" class="registerbtn"> Register</button>
         </div>
 
     </form>

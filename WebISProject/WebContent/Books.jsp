@@ -16,6 +16,7 @@ width:100%;
 	width:75%;
 	height:40px;
 	float:left;
+	margin-bottom: 50px;
 }
 #search {
             background-color: black;
@@ -26,6 +27,7 @@ width:100%;
             height:40px;
             width:20%;
             float:right;
+            margin-bottom: 50px;
             }
             
             .wraper{
@@ -39,7 +41,7 @@ float:left;
 width:75%;
 height:50px;
 left:10px;
-margin-bottom:5px;
+margin-bottom:20px;
 font-family: "lato",sans-riff;
 font-size: 20px;
 }
@@ -52,7 +54,7 @@ color: white;
 border: none;
 cursor: pointer;
 text-align:center;
-margin-bottom:5px;
+margin-bottom:20px;
 }
 
 </style>

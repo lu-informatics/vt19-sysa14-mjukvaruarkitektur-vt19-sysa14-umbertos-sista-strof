@@ -17,13 +17,13 @@ function renderHTML(data){
 	var htmlString = "";
 	for(i = 0; i < data.length; i++){
 		
-		htmlString += "<tr>" + "<td>" + data[i].isbn + "</td>" + "<td>" + data[i].bookcopy + "</td>" + "<td>" + data[i].endTime + "</td> </tr>";
+		htmlString += "<tr>" + "<td> ISBN: " + data[i].isbn + "</td>" + "<td> Copy: " + data[i].bookcopy + "</td>" + "<td> Due: " + data[i].endTime + "</td> </tr>";
 	}
 	bookTable.insertAdjacentHTML('beforeend', htmlString);
 }
 
 function renderEmptyHTML(data){
-	var htmlString = "<tr> <td> You have no loans </td> </tr>";
+	var htmlString = "<tr> <td> You have no Loans </td> </tr>";
 	bookTable.insertAdjacentHTML('beforeend', htmlString);
 }
 
